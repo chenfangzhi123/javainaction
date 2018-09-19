@@ -1,0 +1,26 @@
+spring:
+  application:name: springboot-rabbitmq-in-action
+  rabbitmq:
+    host: 192.168.199.128
+    port: 5672
+    username: admin
+    password: admin
+#    指明采用发送者确认模式
+    publisher-confirms: true
+    virtual-host: /
+#    listener:
+#      simple:
+##      每个容器的消费者数量控制，也就是线程池的大小
+#       concurrency: 2
+#       max-concurrency: 4
+## 指明失败时的重试
+#       retry:
+#          max-attempts: 1
+#          enabled: true
+##          预期的数量
+#       prefetch:
+    template:
+#    表示如果消息找不到队列就调用return，
+      mandatory: true
+  profiles:
+    active: springold
