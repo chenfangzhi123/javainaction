@@ -1,5 +1,9 @@
 spring:
   application:name: springboot-rabbitmq-in-action
+#  默认springboot 如果要开启spring方式的配置使用springold然后把listener下面的配置注释掉
+  profiles:
+    active:
+      - springboot
   rabbitmq:
     host: 192.168.199.128
     port: 5672
@@ -7,20 +11,30 @@ spring:
     password: admin
 #    指明采用发送者确认模式
     publisher-confirms: true
+#    失败时返回消息
+    publisher-returns: true
     virtual-host: /
-#    listener:
-#      simple:
-##      每个容器的消费者数量控制，也就是线程池的大小
-#       concurrency: 2
-#       max-concurrency: 4
-## 指明失败时的重试
-#       retry:
-#          max-attempts: 1
-#          enabled: true
-##          预期的数量
-#       prefetch:
     template:
-#    表示如果消息找不到队列就调用return，
+#    表示如果消息找不到队列就调用return，注意如果是自己定义的则需要手动指定
       mandatory: true
-  profiles:
-    active: springold
+      exchange: exchange.default
+      routing-key: key.default
+      retry:
+        max-attempts: 3
+        enabled: true
+    listener:
+      simple:
+#      每个容器的消费者数量控制，也就是线程池的大小
+       concurrency: 2
+#       acknowledge-mode: none
+       max-concurrency: 4
+# 开启失败时的重试
+       retry:
+          max-attempts: 3
+          enabled: true
+
+#          预取的数量,spring amqp2.0开始默认值为250，之前默认为1，最好设置稍微大些
+       prefetch: 1
+#    cache:
+##      channel:
+##        size: 2

@@ -1,4 +1,4 @@
-package org.chen.vo;
+package org.yuanfang.rabbit.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Message {
+public class ExampleEvent3 {
     int id;
-    String message;
+    String message3;
 }

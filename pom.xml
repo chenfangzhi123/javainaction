@@ -4,11 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.chenfangzhi</groupId>
+    <groupId>org.yuanfang</groupId>
     <artifactId>java-in-action</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>rabbit-mq-spring</module>
         <module>rabbit-mq-spring-boot</module>
     </modules>
     <packaging>pom</packaging>
@@ -33,7 +32,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.0.RELEASE</version>
+        <version>2.0.5.RELEASE</version>
         <relativePath/>
     </parent>
 
@@ -49,12 +48,11 @@
             <version>1.18.0</version>
             <scope>provided</scope>
         </dependency>
-
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.boot</groupId>-->
-        <!--<artifactId>spring-boot-starter-test</artifactId>-->
-        <!--<scope>test</scope>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <!--在父类工程定义统一的依赖版本-->

@@ -1,4 +1,4 @@
-package org.chen.config;
+package org.yuanfang.rabbit.config.annotation;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 
