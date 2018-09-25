@@ -32,9 +32,5 @@ spring:
        retry:
           max-attempts: 3
           enabled: true
-
 #          预取的数量,spring amqp2.0开始默认值为250，之前默认为1，最好设置稍微大些
        prefetch: 1
-#    cache:
-##      channel:
-##        size: 2

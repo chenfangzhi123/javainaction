@@ -4,8 +4,6 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.amqp.rabbit.annotation.Queue;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +25,7 @@ import static org.yuanfang.rabbit.consumer.ReplyConsumer.REPLY;
  * @ModifiedBy:
  */
 @Slf4j
-@ActiveProfiles(SpringConstant.REPLY_PROFLLE)
+@ActiveProfiles(SpringConstant.REPLY_PROFILE)
 public class ReplyConsumerTest extends BaseTest {
 
     @Autowired

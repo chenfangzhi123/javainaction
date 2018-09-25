@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * @ModifiedBy:
  */
 @Slf4j
-@ActiveProfiles(SpringConstant.CONSUMEER_CONFIRM_PROFILE)
+@ActiveProfiles(SpringConstant.CONSUMER_CONFIRM_PROFILE)
 public class ConsumerWithConfirmTest extends BaseTest {
 
     @Test

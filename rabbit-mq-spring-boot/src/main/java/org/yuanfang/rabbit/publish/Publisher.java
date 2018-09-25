@@ -1,4 +1,4 @@
-package org.yuanfang.rabbit.error.publish;
+package org.yuanfang.rabbit.publish;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +29,6 @@ public class Publisher {
     @Scheduled(fixedDelay = 5 * 1000)
     public void sendTestMessage() {
         rabbitTemplate.convertAndSend(RabbitMQConstant.DEFAULT_EXCHANGE, RabbitMQConstant.DEFAULT_KEY,
-            new ExampleEvent(id.getAndIncrement(), "message from " + RabbitMQConstant.DEFAULT_KEY));
+            new ExampleEvent(id.getAndIncrement(), "basic message !"));
     }
 }

@@ -32,6 +32,19 @@ public abstract class RabbitMQConstant {
     public static final String CONFIRM_KEY = "key.confirm";
 
     /**
+     * 自动确认的队列
+     */
+    public static final String NONE_EXCHANGE = "exchange.none";
+    public static final String NONE_QUEUE = "queue.none";
+    public static final String NONE_KEY = "key.none";
+    /**
+     * 死信队列
+     */
+    public static final String DEAD_EXCHANGE = "exchange.dead";
+    public static final String DEAD_QUEUE = "queue.dead";
+    public static final String DEAD_KEY = "key.dead";
+
+    /**
      * 显示声明的队列名字
      */
     public static final String PROGRAMMATICALLY_QUEUE = "queue.programmatically";
@@ -65,4 +78,9 @@ public abstract class RabbitMQConstant {
     public static final String RPC_EXCHANGE = "exchange.rpc";
     public static final String RPC_QUEUE = "queue.rpc";
     public static final String RPC_KEY = "key.rpc";
+    /**
+     * 死信队列参数
+     */
+    public static final String DEAD_LETTER_EXCHANGE = "x-dead-letter-exchange";
+    public static final String DEAD_LETTER_KEY = "x-dead-letter-routing-key";
 }

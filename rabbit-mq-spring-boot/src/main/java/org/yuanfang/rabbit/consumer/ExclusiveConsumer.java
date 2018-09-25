@@ -1,8 +1,10 @@
 package org.yuanfang.rabbit.consumer;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.yuanfang.rabbit.common.constant.RabbitMQConstant;
+import org.yuanfang.rabbit.common.constant.SpringConstant;
 import org.yuanfang.rabbit.config.annotation.MyListener;
 import org.yuanfang.rabbit.vo.ExampleEvent;
 
@@ -15,6 +17,7 @@ import org.yuanfang.rabbit.vo.ExampleEvent;
  */
 @Slf4j
 @Component
+@Profile(SpringConstant.CONSUMER_EXCLUSIVE_PROFILE)
 public class ExclusiveConsumer {
 
     @MyListener

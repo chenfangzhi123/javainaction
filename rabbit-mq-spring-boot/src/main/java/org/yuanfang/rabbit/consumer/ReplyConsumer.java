@@ -25,7 +25,7 @@ import java.util.Map;
  * @ModifiedBy:
  */
 @Component
-@Profile(SpringConstant.REPLY_PROFLLE)
+@Profile(SpringConstant.REPLY_PROFILE)
 @Slf4j
 public class ReplyConsumer {
 

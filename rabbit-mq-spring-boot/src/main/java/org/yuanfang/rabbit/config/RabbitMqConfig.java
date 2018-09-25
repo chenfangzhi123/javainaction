@@ -2,19 +2,17 @@ package org.yuanfang.rabbit.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AcknowledgeMode;
-import org.springframework.amqp.core.Address;
-import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.config.DirectRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
-import org.springframework.amqp.support.SendRetryContextAccessor;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
-import org.springframework.retry.RetryContext;
+import org.yuanfang.rabbit.common.constant.SpringConstant;
 
 /**
  * @Author: chenfangzhi
@@ -25,23 +23,6 @@ import org.springframework.retry.RetryContext;
 @Configuration
 @Slf4j
 public class RabbitMqConfig {
-
-    private static Object recover(RetryContext ctx) {
-        Message failed = SendRetryContextAccessor.getMessage(ctx);
-        Address message = SendRetryContextAccessor.getAddress(ctx);
-        Throwable t = ctx.getLastThrowable();
-        //一般是记录日志和投递到别的队列
-        log.error("reply error,message:{},reply to:{}", failed, message, t);
-        return null;
-    }
-
-    // @Bean
-    // @Primary
-    // RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
-    //     RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-    //     rabbitTemplate.setMessageConverter(messageConverter());
-    //     return rabbitTemplate;
-    // }
 
     /**
      * 默认采用了java的序列化，性能比较低，而且阅读不友好
@@ -81,12 +62,10 @@ public class RabbitMqConfig {
     SimpleRabbitListenerContainerFactory container(ConnectionFactory connectionFactory) {
         SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory = new SimpleRabbitListenerContainerFactory();
         simpleRabbitListenerContainerFactory.setConnectionFactory(connectionFactory);
+        //错误的回调，还有个org.springframework.amqp.rabbit.listener.RabbitListenerErrorHandler
+        simpleRabbitListenerContainerFactory.setErrorHandler(t -> log.error("listener error!", t));
         simpleRabbitListenerContainerFactory.setMessageConverter(new Jackson2JsonMessageConverter());
         simpleRabbitListenerContainerFactory.setTaskExecutor(getTaskExecutor());
-        //测试消费者回复消息失败时的处理逻辑
-        //一般是记录日志和投递到别的队列
-        // todoBychenfangzhi ----2018/9/23 1:10------>
-        simpleRabbitListenerContainerFactory.setReplyRecoveryCallback(RabbitMqConfig::recover);
         return simpleRabbitListenerContainerFactory;
     }
 
@@ -113,11 +92,22 @@ public class RabbitMqConfig {
     SimpleRabbitListenerContainerFactory containerWithConfirm(ConnectionFactory connectionFactory) {
         SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory = new SimpleRabbitListenerContainerFactory();
         simpleRabbitListenerContainerFactory.setConnectionFactory(connectionFactory);
-        // todoBychenfangzhi ----2018/9/23 1:20------>测试AcknowledgeMode.NONE狂发消息的情况
         simpleRabbitListenerContainerFactory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
         simpleRabbitListenerContainerFactory.setMessageConverter(new Jackson2JsonMessageConverter());
         simpleRabbitListenerContainerFactory.setTaskExecutor(getTaskExecutor());
-        simpleRabbitListenerContainerFactory.setReplyRecoveryCallback(RabbitMqConfig::recover);
+        return simpleRabbitListenerContainerFactory;
+    }
+
+    @Bean
+    @Profile(SpringConstant.CONSUMER_NONE_PROFILE)
+    SimpleRabbitListenerContainerFactory containerWithNone(ConnectionFactory connectionFactory) {
+        SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory = new SimpleRabbitListenerContainerFactory();
+        simpleRabbitListenerContainerFactory.setConnectionFactory(connectionFactory);
+        simpleRabbitListenerContainerFactory.setAcknowledgeMode(AcknowledgeMode.NONE);
+        //这里每个客户端预取一条，是为了更好的复现问题。将消费者设置为RabbitMQ的自动模式时，这个参数没有作用了
+        simpleRabbitListenerContainerFactory.setPrefetchCount(1);
+        simpleRabbitListenerContainerFactory.setMessageConverter(new Jackson2JsonMessageConverter());
+        simpleRabbitListenerContainerFactory.setTaskExecutor(getTaskExecutor());
         return simpleRabbitListenerContainerFactory;
     }
 }
