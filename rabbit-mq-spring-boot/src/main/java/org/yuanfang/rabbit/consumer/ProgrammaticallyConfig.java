@@ -56,7 +56,7 @@ public class ProgrammaticallyConfig {
     }
 
     /**
-     * 声明简单的消息，接收到的都是原始的{@link Message}
+     * 声明简单的消费者，接收到的都是原始的{@link Message}
      *
      * @param connectionFactory
      *
@@ -72,7 +72,7 @@ public class ProgrammaticallyConfig {
     }
 
     /**
-     * 声明带Channel的消息,比如要手动确认消息时就会用到这个
+     * 声明带Channel的消费者,比如要手动确认消息时就会用到这个
      *
      * @param connectionFactory
      *
@@ -90,7 +90,7 @@ public class ProgrammaticallyConfig {
     }
 
     /**
-     * 声明采用MessageListenerAdapter的消息，Convert在MessageListenerAdapter中设置
+     * 声明采用MessageListenerAdapter的消费者，Convert在MessageListenerAdapter中设置
      *
      * @param connectionFactory
      *
