@@ -9,6 +9,8 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>rabbit-mq-spring-boot</module>
+        <module>zookeeper</module>
+        <module>dubbo-spring-boot</module>
     </modules>
     <packaging>pom</packaging>
 
