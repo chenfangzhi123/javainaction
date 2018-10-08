@@ -39,7 +39,7 @@ public class ProgrammaticallyConfig {
     }
 
     /**
-     * 下面这些虽然可以通过消费者定义，但建议生产者至少要定义交换器。对于重要的消息生产者也去定义队列，因为消息匹配不到队列时便会丢失
+     * 消费者和生产者都可以声明，交换器这种一般经常创建，可以手动创建。需要注意对于没有路由到队列的消息会被丢弃。
      *
      * @return
      */
@@ -56,7 +56,7 @@ public class ProgrammaticallyConfig {
     }
 
     /**
-     * 声明简单的消息，接收到的都是原始的{@link Message}
+     * 声明简单的消费者，接收到的都是原始的{@link Message}
      *
      * @param connectionFactory
      *
@@ -72,7 +72,7 @@ public class ProgrammaticallyConfig {
     }
 
     /**
-     * 声明带Channel的消息,比如要手动确认消息时就会用到这个
+     * 声明带Channel的消费者,比如要手动确认消息时就会用到这个
      *
      * @param connectionFactory
      *
@@ -90,7 +90,7 @@ public class ProgrammaticallyConfig {
     }
 
     /**
-     * 声明采用MessageListenerAdapter的消息，Convert在MessageListenerAdapter中设置
+     * 声明采用MessageListenerAdapter的消费者，Convert在MessageListenerAdapter中设置
      *
      * @param connectionFactory
      *
