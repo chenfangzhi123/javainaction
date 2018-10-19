@@ -13,6 +13,7 @@
         <module>zookeeper</module>
         <module>dubbo-spring-boot</module>
         <module>java-basic</module>
+        <module>dubbo</module>
     </modules>
     <packaging>pom</packaging>
 
