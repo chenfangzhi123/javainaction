@@ -12,6 +12,7 @@
         <module>juc</module>
         <module>zookeeper</module>
         <module>dubbo-spring-boot</module>
+        <module>dubbo</module>
     </modules>
     <packaging>pom</packaging>
 
