@@ -12,6 +12,7 @@
         <module>juc</module>
         <module>zookeeper</module>
         <module>dubbo-spring-boot</module>
+        <module>java-basic</module>
         <module>dubbo</module>
     </modules>
     <packaging>pom</packaging>
@@ -44,6 +45,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
         <!--lombok是一款编译插件，注意scope设置为provided减少运行期不必要的依赖。-->
         <dependency>
