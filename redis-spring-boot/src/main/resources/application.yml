@@ -1,0 +1,8 @@
+spring:
+  redis:
+    database: 1 # Database index used by the connection factory.
+    url: redis://alpha:amigo123@10.10.32.167:6379
+    host: 10.10.32.167 # Redis server host.
+    lettuce:
+      pool:
+        max-wait: -1ms
