@@ -34,16 +34,20 @@ public class CompletableFutureTest {
         // System.out.println(System.currentTimeMillis() - l);
         // CompletableFuture.supplyAsync(() -> 12).thenApply(Function.identity()).thenAccept(System.out::println);
 
-        CompletableFuture.supplyAsync(() -> 1)
-            .whenComplete((o, throwable) -> log.info("进入when o:{}", o)).thenAcceptAsync(o -> {
-            System.out.println(o);
+        CompletableFuture.supplyAsync(() -> 1).whenComplete((o, throwable) -> {
+            System.out.println("when1");
+            throw new RuntimeException();
+        }).thenAccept(o -> {
+            System.out.println("accetp2");
         }).thenApply(aVoid -> {
+            System.out.println("apply");
             return 1;
-        }).exceptionally(throwable -> {
-            System.out.println("进入异常");
-            throwable.printStackTrace();
-            return 2;
+        }).whenComplete((integer, throwable) -> {
+            System.out.println("when2");
+        }).thenAccept(integer -> {
+            System.out.println("accetp");
         });
+
 
         System.in.read();
     }
