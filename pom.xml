@@ -15,6 +15,7 @@
         <module>java-basic</module>
         <module>dubbo</module>
         <module>redis-spring-boot</module>
+        <module>websocket</module>
     </modules>
     <packaging>pom</packaging>
 
