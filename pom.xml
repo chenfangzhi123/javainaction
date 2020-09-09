@@ -16,6 +16,7 @@
         <module>dubbo</module>
         <module>redis-spring-boot</module>
         <module>websocket</module>
+      <module>util</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -65,11 +66,11 @@
             <!--因为是例子项目所以测试jar加到项目中-->
             <!--<scope>test</scope>-->
         </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.9.6</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.fasterxml.jackson.core</groupId>-->
+<!--            <artifactId>jackson-databind</artifactId>-->
+<!--            <version>2.9.6</version>-->
+<!--        </dependency>-->
     </dependencies>
 
     <!--在父类工程定义统一的依赖版本-->
