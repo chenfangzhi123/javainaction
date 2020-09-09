@@ -5,14 +5,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Date;
-import lombok.Data;
 
-@Data
+//@Data
 @JsonIgnoreProperties(ignoreUnknown = true, allowGetters = true)
 public class My {
 
   @JsonAlias("no")
-  int my;
+  public int my;
   int hello;
   @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
   Date date;
@@ -26,8 +25,8 @@ public class My {
 
   public static void main(String[] args) {
     My my = new My();
-    my.setDate(new Date());
-    my.setHello(89);
+    //my.setDate(new Date());
+    //my.setHello(89);
 
     my.date = new Date();
     System.out.println(JsonUtils.toJSON(my));

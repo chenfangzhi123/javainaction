@@ -1,5 +1,7 @@
 package org.yuanfang.json;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import java.util.List;
@@ -11,7 +13,12 @@ public class JsonUtils {
 
 
   private static final ThreadLocal<ObjectMapper> objMapperLocal = ThreadLocal
-      .withInitial(() -> new ObjectMapper());
+      .withInitial(() -> {
+        ObjectMapper objectMapper = new ObjectMapper();
+        //默认会序列号public的字段和getter方法
+        //objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+        return objectMapper;
+      });
 
   public static String toJSON(Object value) {
     String result = null;
